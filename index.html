@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dribble Clone</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Dribble Clone</h1>
+    </div>
+    <div class="main">
+        <h2>Discover the world's top designers & creatives</h2>
+        <div class="auth">
+            <input type="text" placeholder="Username">
+            <input type="password" placeholder="Password">
+            <button onclick="alert('Sign up / Login functionality coming soon!')">Sign Up / Login</button>
+        </div>
+        <div class="gallery">
+            <div class="slides">
+                <img src="images/1 img.jpg" alt="Sample Image 1" onclick="openModal(this)">
+                <img src="images/2 img.jpg" alt="Sample Image 2" onclick="openModal(this)">
+                <img src="images/3 img.jpg" alt="Sample Image 3" onclick="openModal(this)">
+                <img src="images/4 img.jpg" alt="Sample Image 4" onclick="openModal(this)">
+                <img src="images/5 img.jpg" alt="Sample Image 5" onclick="openModal(this)">
+                <img src="images/6 img.jpg" alt="Sample Image 6" onclick="openModal(this)">
+            </div>
+            <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+            <button class="next" onclick="changeSlide(1)">&#10095;</button>
+            <div class="thumbnails">
+                <img src="images/1 img.jpg" alt="Sample Image 1" onclick="currentSlide(0)">
+                <img src="images/2 img.jpg" alt="Sample Image 2" onclick="currentSlide(1)">
+                <img src="images/3 img.jpg" alt="Sample Image 3" onclick="currentSlide(2)">
+                <img src="images/4 img.jpg" alt="Sample Image 4" onclick="currentSlide(3)">
+                <img src="images/5 img.jpg" alt="Sample Image 5" onclick="currentSlide(4)">
+                <img src="images/6 img.jpg" alt="Sample Image 6" onclick="currentSlide(5)">
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>&copy; 2024 Dribble Clone. All rights reserved.</p>
+    </div>
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="imgModal">
+    </div>
+    <script>
+        let currentSlideIndex = 0;
+
+        function showSlide(index) {
+            const slides = document.querySelector('.gallery .slides');
+            const totalSlides = slides.children.length;
+            if (index >= totalSlides) {
+                currentSlideIndex = 0;
+            } else if (index < 0) {
+                currentSlideIndex = totalSlides - 1;
+            } else {
+                currentSlideIndex = index;
+            }
+            const offset = -currentSlideIndex * 100;
+            slides.style.transform = translateX(${offset}%);
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlideIndex + direction);
+        }
+
+        function currentSlide(index) {
+            showSlide(index);
+        }
+
+        // Auto slide every 5 seconds
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+
+        showSlide(currentSlideIndex);
+
+        function openModal(element) {
+            const modal = document.getElementById('myModal');
+            const modalImg = document.getElementById('imgModal');
+            modal.style.display = "block";
+            modalImg.src = element.src;
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('myModal');
+            modal.style.display = "none";
+        }
+    </script>
+    </body>
+</html>
